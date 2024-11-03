@@ -12,6 +12,9 @@ console.log('MongoDB URI:', process.env.MONGO_URI);
 
 // Middleware to parse JSON requests
 app.use(express.json());
+console.log()
+// Add authentication routes
+app.use('/api/auth', require('./routes/auth'));
 
 // Basic route example
 app.get('/', (req, res) => {
