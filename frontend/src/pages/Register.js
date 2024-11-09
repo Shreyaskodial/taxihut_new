@@ -11,13 +11,17 @@ function Register() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("Form Data:", formData); // Log form data
         try {
             const response = await axios.post('/api/auth/register', formData);
+            console.log("Server Response:", response); // Log server response
             setMessage(`Registration successful! Welcome, ${response.data.user.name}`);
         } catch (error) {
-            setMessage(error.response.data.message || 'Registration failed');
+            console.error("Error:", error); // Log error
+            setMessage(error.response?.data?.message || 'Registration failed');
         }
     };
+    
 
     return (
         <div>
