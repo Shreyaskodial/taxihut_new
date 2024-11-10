@@ -1,0 +1,115 @@
+/* Register.css */
+
+/* Body Styles */
+body {
+    background-color: #e5ecf5; /* Light gray background */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Centered Form Container */
+.register-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    box-sizing: border-box;
+    
+}
+
+/* Card Styling */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 450px; /* Increased width */
+    height: 350px; 
+}
+
+/* Heading Styling */
+h2 {
+    font-size: 2rem;
+    color: #1877f2; /* Facebook blue color */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Input Field Styling */
+.input-field {
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    background-color: #f7f8fa;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #1877f2; /* Highlighted border on focus (Facebook blue) */
+    background-color: #ffffff;
+}
+
+/* Submit Button Styling */
+button[type="submit"] {
+    background-color: #1877f2; /* Facebook blue */
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    padding: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #165e9e; /* Darker blue on hover */
+}
+
+button[type="submit"]:active {
+    background-color: #144a78; /* Even darker blue on click */
+}
+
+/* Forgot Password Link Styling */
+.forgot-password-link {
+    color: #1877f2;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
+}
+
+/* Error/Success Message Styling */
+.text-center.text-danger {
+    font-size: 0.9rem;
+    color: #f44336; /* Red color for error */
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+    .card {
+        padding: 30px 20px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .input-field {
+        font-size: 0.95rem;
+        padding: 12px;
+    }
+
+    button[type="submit"] {
+        font-size: 1rem;
+        padding: 12px;
+    }
+}
