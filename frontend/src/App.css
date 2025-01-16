@@ -34,10 +34,10 @@
 }
 
 /* Adding some spacing and text centering to the body */
-body {
+/* body {
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+} */
