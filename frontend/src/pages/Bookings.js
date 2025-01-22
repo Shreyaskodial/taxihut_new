@@ -3,7 +3,7 @@ import './Booking.css';
 import axios from 'axios';
 
 const Bookings = () => {
-  const [formData, setFormData] = useState({ name: '', date: '', time: '', passengers: 1 });
+  const [formData, setFormData] = useState({ name: '', email: '', contact: '', date: '', time: '', passengers: 1 });
   const [message, setMessage] = useState('');
   const tripPrice = 1500; // Define the trip price or fetch from server if dynamic
 
@@ -11,28 +11,45 @@ const Bookings = () => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
-  const initiatePayment = async (orderId, amount) => {
+
+  const initiatePayment = async (orderId, tripPrice) => {
     const options = {
-      key: 'rzp_test_K0RlwZlz7o5u1K', // Use your Razorpay key
-      amount: 1, // Convert to paise
+      key: 'rzp_test_K0RlwZlz7o5u1K', // Use your Razorpay key securely
+      amount: tripPrice * 100, // Amount in paise
       currency: 'INR',
       name: 'Sk Travel',
       description: 'Trip Booking',
-      order_id: orderId, // Use dynamic orderId
-      handler: function (response) {
-        alert('Payment Successful! Payment ID: ' + response.razorpay_payment_id);
-        setMessage('Booking and payment successful.');
+      order_id: orderId,
+      handler: async function (response) {
+        try {
+          alert('Payment Successful! Payment ID: ' + response.razorpay_payment_id);
+          setMessage('Booking and payment successful.');
+      
+          const paymentData = {
+            orderId: orderId,
+            paymentId: response.razorpay_payment_id,
+            signature: response.razorpay_signature,  // Important for verification
+            amount: tripPrice,
+          };
+      console.log(paymentData)
+          // Send payment details to the backend
+          await axios.post('/api/bookpayment/paymentsuccess', paymentData);
+        } catch (error) {
+          console.error('Failed to store payment data:', error);
+          setMessage('Payment succeeded, but failed to store payment data. Please contact support.');
+        }
       },
+      
       prefill: {
-        name: formData.name || 'Default Name', // Ensure name is provided
-        email: formData.email || 'example@example.com', // Use dynamic user email
-        contact: formData.contact || '9999999999' // Use dynamic user contact
+        name: formData.name,
+        email: formData.email,
+        contact: formData.contact,
       },
       theme: {
         color: '#3399cc'
       }
     };
-  
+
     try {
       const paymentObject = new window.Razorpay(options);
       paymentObject.open();
@@ -41,14 +58,14 @@ const Bookings = () => {
       setMessage('Failed to initiate payment. Please try again.');
     }
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const bookingResponse = await axios.post('/api/bookings/book', formData);
-      const { orderId, amount } = bookingResponse.data; // Server response should contain order ID and amount
+      const { orderId, amount } = bookingResponse.data;
       setMessage('Booking initiated. Proceeding to payment...');
-      initiatePayment(orderId, amount); // Call Razorpay payment
+      initiatePayment(orderId, amount);
     } catch (error) {
       console.error('Error:', error);
       const errorMessage = error.response?.data?.message || 'Booking failed. Please try again.';
@@ -70,6 +87,28 @@ const Bookings = () => {
               id="name"
               name="name"
               value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="contact">Contact:</label>
+            <input
+              type="tel"
+              id="contact"
+              name="contact"
+              value={formData.contact}
               onChange={handleChange}
               required
             />

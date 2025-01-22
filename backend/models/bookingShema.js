@@ -1,7 +1,10 @@
+// const { text } = require('express');
 const mongoose = require('mongoose');
 
 const bookingSchema = new mongoose.Schema({
-  name: { type: String, required: true, trim: true },  // Added trim to clean up whitespace
+  name: { type: String, required: true, trim: true }, 
+  email: { type: String, required: true, trim: true }, 
+  contact: { type: Number, required: true, trim: true },
   date: { type: Date, required: true },
   time: { type: String, required: true, trim: true },
   passengers: { type: Number, required: true, min: 1 },

@@ -3,7 +3,7 @@ const BookingNow = require('../models/bookingShema');
 const router = express.Router();
 
 router.post('/book', async (req, res) => {
-  const { name, date, time, passengers } = req.body;
+  const { name, email,contact,date, time, passengers } = req.body;
   const route = 'Mysore to Bangalore';
   const price = 2000;
 
@@ -14,6 +14,8 @@ router.post('/book', async (req, res) => {
   try {
     const newBooking = new BookingNow ({
       name,
+      email,
+      contact,
       date,
       time,
       passengers,

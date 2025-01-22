@@ -14,6 +14,7 @@ app.use(express.json());
 // Add routes
 app.use('/api/auth', require('./routes/auth')); // Authentication routes
 app.use('/api/bookings', require('./routes/booking')); // Booking routes
+app.use('/api/bookpayment', require('./routes/bookPayment'));  // Booking routes
 
 // Basic route example
 app.get('/', (req, res) => {
