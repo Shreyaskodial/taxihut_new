@@ -8,13 +8,13 @@ const router = express.Router();
 router.post('/paymentsuccess', async (req, res) => {
     console.log('enter');
   try {
-    const { orderId, paymentId, signature, amount } = req.body;
+    const {  paymentId,  amount } = req.body;
 
     // Create a new payment transaction record
     const paymentTransaction = new PaymentTransaction ({
-      orderId,
+      // orderId,
       paymentId,
-      signature,
+      // signature,
       amount,
       status: 'success',  // Add status to indicate success
       date: new Date()

@@ -15,7 +15,7 @@ const Bookings = () => {
   const initiatePayment = async (orderId, tripPrice) => {
     const options = {
       key: 'rzp_test_K0RlwZlz7o5u1K', // Use your Razorpay key securely
-      amount: tripPrice * 100, // Amount in paise
+      amount: tripPrice , // Amount in paise
       currency: 'INR',
       name: 'Sk Travel',
       description: 'Trip Booking',
@@ -26,10 +26,8 @@ const Bookings = () => {
           setMessage('Booking and payment successful.');
       
           const paymentData = {
-            orderId: orderId,
-            paymentId: response.razorpay_payment_id,
-            signature: response.razorpay_signature,  // Important for verification
-            amount: tripPrice,
+            paymentId: response.razorpay_payment_id,  // Important for verification
+            amount: 1500,
           };
       console.log(paymentData)
           // Send payment details to the backend
