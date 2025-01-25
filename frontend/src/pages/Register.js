@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Register.css'; // Custom CSS file for design
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 function Register() {
     const [formData, setFormData] = useState({ name: '', email: '', password: '' });
     const [message, setMessage] = useState('');
+    const [passwordVisible, setPasswordVisible] = useState(false); 
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,7 +24,9 @@ function Register() {
             setMessage(error.response?.data?.message || 'Registration failed');
         }
     };
-
+    const togglePasswordVisibility = () => {
+        setPasswordVisible((prev) => !prev); // Toggle password visibility
+    };
     return (
         <div className="register-container">
             <div className="row justify-content-center">
@@ -50,16 +54,34 @@ function Register() {
                                     required
                                 />
                             </div>
-                            <div className="mb-3">
-                                <input
-                                    type="password"
-                                    name="password"
-                                    className="form-control input-field"
-                                    placeholder="Password"
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
+                            <div className="password-field-wrapper" style={{ position: 'relative' }}>
+               <input
+                  type={passwordVisible ? 'text' : 'password'}
+                  name="password"
+                  className="form-control input-field"
+                  placeholder="Password"
+                  onChange={handleChange}
+                  required
+                  style={{ paddingRight: '40px' }} // Add space for the eye icon
+                />
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary eye-button"
+                  onClick={togglePasswordVisibility}
+                  style={{
+                  position: 'absolute',
+                  right: '10px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  border: 'none',
+                  background: 'transparent',
+                  cursor: 'pointer',
+                }}
+             >
+        {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+    </button>
+</div>
+
                             <button type="submit" className="btn btn-primary w-100">Register</button>
                         </form>
                         {message && <div className="mt-3 text-center text-danger">{message}</div>}
