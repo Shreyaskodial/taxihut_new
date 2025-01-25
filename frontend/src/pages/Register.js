@@ -18,7 +18,7 @@ function Register() {
         try {
             const response = await axios.post('/api/auth/register', formData);
             console.log("Server Response:", response); // Log server response
-            setMessage(`Registration successful! Welcome, ${response.data.user.name}`);
+            setMessage(`Registration successful! Welcome`);
         } catch (error) {
             console.error("Error:", error); // Log error
             setMessage(error.response?.data?.message || 'Registration failed');
@@ -84,7 +84,12 @@ function Register() {
 
                             <button type="submit" className="btn btn-primary w-100">Register</button>
                         </form>
-                        {message && <div className="mt-3 text-center text-danger">{message}</div>}
+                        <div className="mt-3 text-center">
+                            <a href="/login" className="btn btn-link text-decoration-none">Already have an account? Login</a>
+                            <br />
+                            <a href="/forgot-password" className="btn btn-link text-decoration-none">Forgot Password?</a>
+                        </div>
+                        {message && <div className="mt-3 text-center text-success">{message}</div>}
                     </div>
                 </div>
             </div>

@@ -28,7 +28,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 40px;
     width: 450px; /* Increased width */
-    height: 350px; 
+    height: 400px; 
+    padding-bottom: 2rem; 
 }
 
 /* Heading Styling */
@@ -113,28 +114,3 @@ button[type="submit"]:active {
         padding: 12px;
     }
 }
-.input-group {
-    position: relative;
-  }
-  
-  .input-field {
-    padding-right: 40px; /* Add space for the button inside the input */
-  }
-  
-  .toggle-btn {
-    position: absolute;
-    right: 10px; /* Align the button to the right inside the input */
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    z-index: 2;
-  }
-  
-  .toggle-btn svg {
-    font-size: 18px;
-    color: #6c757d;
-  }
-  
